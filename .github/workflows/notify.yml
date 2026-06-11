@@ -2,9 +2,10 @@ name: WC2026 Pre-match Notifier
 
 on:
   schedule:
-    # :29 and :59 during UTC 15-23 and 0-4 = Thai 22:00-11:59 (covers all kickoffs)
-    # each run sends T-60min alerts and waits for T-1min final reminders
-    - cron: "29,59 0-4,15-23 * * *"
+    # :25 and :55 during UTC 15-23 and 0-4 = Thai 22:00-11:59
+    # :55 run -> T-5 for :00 kickoffs + T-60 for next-hour :00 kickoffs
+    # :25 run -> T-5 for :30 kickoffs + T-60 for next-hour :30 kickoffs
+    - cron: "25,55 0-4,15-23 * * *"
   workflow_dispatch: {}
 
 jobs:
