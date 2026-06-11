@@ -1,0 +1,21 @@
+name: WC2026 Telegram Notifier
+
+on:
+  schedule:
+    # UTC hours 15-23 and 0-4 = Thai time 22:00-11:00 (covers every kickoff window)
+    - cron: "0 0-4,15-23 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send pre-match notifications
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python notify.py
