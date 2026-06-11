@@ -1,0 +1,25 @@
+name: WC2026 Daily Digest
+
+on:
+  schedule:
+    # Thai 00:01 / 08:00 / 16:00 / 23:59  (UTC+7 -> UTC 17:01 / 01:00 / 09:00 / 16:59)
+    - cron: "1 17 * * *"
+    - cron: "0 1 * * *"
+    - cron: "0 9 * * *"
+    - cron: "59 16 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send daily digest
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: python digest.py
