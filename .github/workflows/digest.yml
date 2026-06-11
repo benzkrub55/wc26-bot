@@ -21,3 +21,5 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
         run: python digest.py
+
+# schedule re-registration bump 2026-06-12

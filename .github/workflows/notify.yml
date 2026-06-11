@@ -21,3 +21,5 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python notify.py
+
+# schedule re-registration bump 2026-06-12
