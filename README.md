@@ -15,7 +15,6 @@
 ## ไฟล์
 
 - `schedule.csv` — ตาราง 104 นัด เวลาไทย (อัพเดทชื่อทีมหลังจบแต่ละรอบ)
-- `checklist.txt` — รายการงานทีม แก้ได้เลย บรรทัดละ 1 ข้อ
 - `teams_th.py` — แมพชื่อทีมอังกฤษ→ไทย
 - `sent_results.json` — ผลที่ประกาศไปแล้ว (workflow commit เอง ห้ามแก้มือ)
 - `.github/workflows/` — ตัวตั้งเวลา 3 ตัว (notify / results / digest)

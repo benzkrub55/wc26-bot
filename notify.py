@@ -21,16 +21,6 @@ THAI_TZ = timezone(timedelta(hours=7))
 BASE = os.path.dirname(os.path.abspath(__file__))
 
 
-def checklist_block():
-    path = os.path.join(BASE, "checklist.txt")
-    if not os.path.exists(path):
-        return ""
-    items = [l.strip() for l in open(path, encoding="utf-8") if l.strip()]
-    if not items:
-        return ""
-    return "\n\n📋 Checklist ทีมงาน:\n" + "\n".join(f"☐ {i}" for i in items)
-
-
 def send(text):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     data = urllib.parse.urlencode({"chat_id": CHAT_ID, "text": text}).encode()
@@ -64,8 +54,8 @@ def main():
         if 50 < delta <= 65:
             send(
                 f"⏰ อีกประมาณ {int(delta)} นาที บอลโลกเตะ! ({ko:%H:%M} น. เวลาไทย)\n\n"
-                f"{match_lines(group)}"
-                f"{checklist_block()}"
+                f"{match_lines(group)}\n\n"
+                f"📋 เตรียมงานทีมให้พร้อม!"
             )
             sent += 1
 
@@ -80,8 +70,7 @@ def main():
             send(
                 f"🚨 อีก 5 นาทีเตะ! ({ko:%H:%M} น.)\n\n"
                 f"{match_lines(group)}\n\n"
-                f"เช็คให้ครบก่อนบอลเริ่ม 👇"
-                f"{checklist_block()}"
+                f"📋 เช็คงานทีมให้ครบก่อนบอลเริ่ม!"
             )
             sent += 1
 
