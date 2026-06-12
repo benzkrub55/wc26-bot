@@ -1,6 +1,8 @@
 name: WC2026 Pre-match Notifier
 
 on:
+  schedule:
+    - cron: "25,55 0-4,14-23 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -16,5 +18,3 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python notify.py
-
-# schedule re-registration bump 2026-06-12

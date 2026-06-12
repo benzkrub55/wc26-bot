@@ -1,6 +1,9 @@
 name: WC2026 Daily Digest
 
 on:
+  schedule:
+    - cron: "59 16 * * *"
+    - cron: "1 17 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -17,5 +20,3 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
         run: python digest.py
-
-# schedule re-registration bump 2026-06-12

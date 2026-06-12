@@ -1,6 +1,10 @@
 name: WC2026 Instant Results
 
 on:
+  schedule:
+    - cron: "*/15 0-6,17-23 * * *"
+    - cron: "0,30 7-8 * * *"
+    - cron: "0 9 * * *"
   workflow_dispatch: {}
 
 permissions:
