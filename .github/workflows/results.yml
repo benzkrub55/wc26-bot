@@ -2,13 +2,19 @@ name: WC2026 Instant Results
 
 on:
   schedule:
-    - cron: "*/15 0-6,17-23 * * *"
-    - cron: "0,30 7-8 * * *"
+    # ทุก 10 นาที ช่วงบอลจบจริง (ไทย 00:00-13:59) — sent_results.json กันส่งซ้ำ
+    - cron: "*/10 0-6,17-23 * * *"
+    # กันชนเกมลากยาว ไทย 14:00-16:00
+    - cron: "0,20,40 7-8 * * *"
     - cron: "0 9 * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: write
+
+concurrency:
+  group: results
+  cancel-in-progress: false
 
 jobs:
   results:

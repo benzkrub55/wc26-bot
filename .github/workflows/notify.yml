@@ -2,12 +2,22 @@ name: WC2026 Pre-match Notifier
 
 on:
   schedule:
-    - cron: "25,55 0-4,14-23 * * *"
+    # ทุก 10 นาที ช่วง UTC 14-23,0-4 = ไทย 21:00-11:59 — มี sent_alerts.json กันส่งซ้ำ
+    - cron: "*/10 0-4,14-23 * * *"
   workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# กันรอบที่นอนรอ T-5 ชนกับรอบถัดไป (ต่อคิวแทน)
+concurrency:
+  group: notify
+  cancel-in-progress: false
 
 jobs:
   notify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -18,3 +28,13 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python notify.py
+      - name: Commit state
+        run: |
+          if [ -f sent_alerts.json ] && [ -n "$(git status --porcelain sent_alerts.json)" ]; then
+            git config user.name "wc26-bot"
+            git config user.email "actions@github.com"
+            git add sent_alerts.json
+            git commit -m "Update sent alerts"
+            git pull --rebase origin main
+            git push
+          fi
