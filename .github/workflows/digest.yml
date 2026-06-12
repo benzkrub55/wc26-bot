@@ -1,10 +1,6 @@
 name: WC2026 Daily Digest
 
 on:
-  schedule:
-    # Thai 00:01 (programme) and 23:59 (results) = UTC 17:01 / 16:59
-    - cron: "1 17 * * *"
-    - cron: "59 16 * * *"
   workflow_dispatch: {}
 
 jobs:

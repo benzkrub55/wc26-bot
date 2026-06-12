@@ -1,9 +1,6 @@
 name: WC2026 Instant Results
 
 on:
-  schedule:
-    # every 15 min during UTC 17-23 and 0-6 = Thai 00:00-13:59 (when matches finish)
-    - cron: "*/15 0-6,17-23 * * *"
   workflow_dispatch: {}
 
 permissions:
