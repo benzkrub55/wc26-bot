@@ -2,8 +2,8 @@ name: WC2026 Pre-match Notifier
 
 on:
   schedule:
-    # ทุก 10 นาที ช่วง UTC 14-23,0-4 = ไทย 21:00-11:59 — มี sent_alerts.json กันส่งซ้ำ
-    - cron: "*/10 0-4,14-23 * * *"
+    # ทุก 5 นาที (ขั้นต่ำที่ GitHub อนุญาต) ช่วงไทย 21:00-11:59 — sent_alerts.json กันส่งซ้ำ
+    - cron: "*/5 0-4,14-23 * * *"
   workflow_dispatch: {}
 
 permissions:
